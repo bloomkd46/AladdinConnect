@@ -83,7 +83,6 @@ export default class Aladdin {
         headers: {
           'Host': '16375mc41i.execute-api.us-east-1.amazonaws.com',
           'Accept': '*/*',
-          'Authorization': 'Bearer 204308952C22783D==',
           'app_version': '5.17',
           'X-API-KEY': '2BcHhgzjAa58BXkpbYM977jFvr3pJUhH52nflMuS',
           'Accept-Language': 'en-US,en;q=0.9',
