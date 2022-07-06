@@ -4,6 +4,8 @@ import Debug from 'debug';
 import { AladdinError, Configuration, DurationRule, LoginResponse, TimeRangeRule } from './types';
 import GarageDoor from './garageDoor';
 
+export * from './types';
+export * from './garageDoor';
 export default class Aladdin {
   public events = new EventEmitter();
   public accessToken = '';

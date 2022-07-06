@@ -75,18 +75,18 @@ export interface Door {
   name: string;
   vehicle_type: 'CAR' | 'TRUCK' | 'VAN' | 'SUV' | string;
 }
-enum DoorLink {
+export enum DoorLink {
   UNKNOWN = 0,
   NOT_CONFIGURED = 1,
   PAIRED = 2,
   CONNECTED = 3,
 }
-enum DesiredDoorStatus {
+export enum DesiredDoorStatus {
   CLOSED = 0,
   OPEN = 1,
   NONE = 99, // Once the garage is in the desired state Genie reports this.
 }
-enum DoorStatus {
+export enum DoorStatus {
   UNKNOWN = 0,
   OPEN = 1,
   OPENING = 2,
@@ -115,7 +115,7 @@ export interface Configuration {
   message: string;
   isOneP: boolean;
 }
-interface Invite {
+export interface Invite {
   updated_at: string;
   to: {
     allowed: boolean;
@@ -134,7 +134,7 @@ interface Invite {
   name: string;
   type: 'full' | string;
 }
-interface Location {
+export interface Location {
   updated_at: string;
   legacy_rid: string;
   id: number;
@@ -181,20 +181,20 @@ export interface DurationRule {
   name: string;
   days: ('mon' | 'tue' | 'wed' | 'thu' | 'fri' | 'sat' | 'sun')[];
 }
-interface RuleDevice {
+export interface RuleDevice {
   rule_id: number;
   id: number;
   doors: RuleDoor[];
   name: string;
   serial: string;
 }
-interface RuleDoor {
+export interface RuleDoor {
   door_index: number;
   device_id: number;
   name: string;
   id: number;
 }
-interface Partner {
+export interface Partner {
   ac_promo_start_content_url?: string;
   icon: string;
   id: number;
@@ -244,13 +244,13 @@ export interface TimeRangeRuleTemplate {
   devices: RuleTemplateDevice[];
   name: string;
 }
-interface RuleTemplateDevice {
+export interface RuleTemplateDevice {
   id: number;
   doors: RuleTemplateDoor[];
   serial: string;
   name: string;
 }
-interface RuleTemplateDoor {
+export interface RuleTemplateDoor {
   door: number;
 }
 
@@ -258,7 +258,7 @@ export interface History {
   message: string;
   commands: Command[];
 }
-interface Command {
+export interface Command {
   updated_at: string;
   invoker_type: 'invitee' | 'owner';
   id: number;
