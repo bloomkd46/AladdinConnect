@@ -2,7 +2,7 @@ import axios, { AxiosError } from 'axios';
 import { EventEmitter } from 'events';
 import Debug from 'debug';
 import { AladdinError, Configuration, DurationRule, LoginResponse, TimeRangeRule } from './types';
-import GarageDoor from './garageDoor';
+import { GarageDoor } from './garageDoor';
 
 export * from './types';
 export * from './garageDoor';

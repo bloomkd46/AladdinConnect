@@ -4,7 +4,7 @@ import { Device, Door, DurationRule, History, TimeRangeRule } from './types';
 import Debug from 'debug';
 
 
-export default class GarageDoor {
+export class GarageDoor {
   protected log = Debug(`AladdinConnect:${this.door.name}`);
   protected debugBody = Debug(`AladdinConnect:${this.door.name}:Body's`);
   protected debugResponse = Debug(`AladdinConnect:${this.door.name}:Responses`);
