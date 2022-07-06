@@ -6,7 +6,7 @@ import Debug from 'debug';
 
 export default class GarageDoor {
   protected log = Debug(`AladdinConnect:${this.door.name}`);
-  protected debugBody = Debug(`AladdinConnect:${this.door.name}:Bodys`);
+  protected debugBody = Debug(`AladdinConnect:${this.door.name}:Body's`);
   protected debugResponse = Debug(`AladdinConnect:${this.door.name}:Responses`);
   constructor(public readonly aladdin: Aladdin, public device: Device, public door: Door, public rules: (TimeRangeRule | DurationRule)[]) {
     this.log.color = '33';

@@ -13,7 +13,7 @@ export default class Aladdin {
   public Configuration!: Configuration;
 
   protected log = Debug('AladdinConnect');
-  protected debugBody = Debug('AladdinConnect:Bodys');
+  protected debugBody = Debug('AladdinConnect:Body\'s');
   protected debugResponse = Debug('AladdinConnect:Responses');
 
   protected error = Debug('AladdinConnect:Error');
