@@ -1,14 +1,14 @@
 {
-  "name": "genie-aladdinconnect",
+  "name": "aladdinconnect",
   "version": "1.0.0",
   "description": "Unofficial node.js library (SDK) to control Genie's Aladdin Connect Garage Doors",
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "https://github.com/bloomkd46/Genie-AladdinConnect.git"
+    "url": "https://github.com/bloomkd46/AladdinConnect.git"
   },
   "bugs": {
-    "url": "https://github.com/bloomkd46/Genie-AladdinConnect/issues"
+    "url": "https://github.com/bloomkd46/AladdinConnect/issues"
   },
   "main": "dist/index.js",
   "scripts": {
@@ -19,10 +19,11 @@
     "pretest": "npm run build"
   },
   "keywords": [
-    "xhome",
-    "Xfinity",
-    "Home",
-    "iControl"
+    "Genie",
+    "Aladdin",
+    "Connect",
+    "Garage",
+    "Door"
   ],
   "dependencies": {
     "axios": "^0.26.1",
@@ -38,6 +39,6 @@
     "supports-color": "^9.2.2",
     "ts-node": "^10.3.0",
     "typedoc": "^0.22.16",
-    "typescript": "^4.4.4"
+    "typescript": "^4.7.4"
   }
 }
