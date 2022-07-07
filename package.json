@@ -1,5 +1,5 @@
 {
-  "name": "aladdinconnect",
+  "name": "genie-aladdinconnect",
   "version": "1.0.0",
   "description": "Unofficial node.js library (SDK) to control Genie's Aladdin Connect Garage Doors",
   "license": "Apache-2.0",
