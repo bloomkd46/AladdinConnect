@@ -54,7 +54,7 @@ export interface Device {
   is_updating_firmware: boolean;
 }
 export interface Door {
-  desired_door_status_outcome: 'success' | string;
+  desired_door_status_outcome: 'success' | 'timedout';
   updated_at: string;
   desired_door_status: 'Close' | 'Open';
   id: number;

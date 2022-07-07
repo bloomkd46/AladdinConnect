@@ -1,7 +1,9 @@
 import axios from 'axios';
-import Aladdin from '.';
-import { Device, Door, DurationRule, History, TimeRangeRule } from './types';
 import Debug from 'debug';
+
+import Aladdin from './';
+import { Device, Door, DurationRule, History, TimeRangeRule } from './types';
+
 
 
 export class GarageDoor {
@@ -15,35 +17,69 @@ export class GarageDoor {
   }
 
   get(): Promise<[Device, Door]> {
-    this.log('Getting Door');
     return new Promise((resolve, reject) => {
-      axios({
-        method: 'get',
-        url: `https://16375mc41i.execute-api.us-east-1.amazonaws.com/IOS/devices/${this.device.id}`,
-        headers: {
-          'Host': '16375mc41i.execute-api.us-east-1.amazonaws.com',
-          'Accept': '*/*',
-          'Authorization': `${this.aladdin.tokenType} ${this.aladdin.accessToken}`,
-          'app_version': '5.17',
-          'X-API-KEY': '2BcHhgzjAa58BXkpbYM977jFvr3pJUhH52nflMuS',
-          'Accept-Language': 'en-US,en;q=0.9',
-          'Accept-Encoding': 'gzip, deflate, br',
-          'User-Agent': 'Aladdin%20Connect/75 CFNetwork/1335.0.2 Darwin/21.6.0',
-          'Connection': 'keep-alive',
-          'Content-Type': 'application/json',
-        },
-        validateStatus: (status) => {
-          return status === 200;
-        },
-        timeout: 60000,
-        timeoutErrorMessage: 'Request Timed Out',
-      }).then(response => {
-        this.debugResponse(response.data);
-        const GarageDoor: [Device, Door] = [response.data, response.data.doors.find(door => door.id === this.door.id)];
-        this.device = GarageDoor[0];
-        this.door = GarageDoor[1];
-        resolve(GarageDoor);
-      }).catch(err => reject(this.aladdin.parseError(err)));
+      //If the acount is the "owner" then we can directly access the door, otherwise we need to re-fetch the whole configuration
+      if (this.aladdin.Configuration.invites.recv.find(invite => invite.user_id === this.door.user_id)) {
+        this.log('Getting Door Via Configuration');
+        axios({
+          method: 'get',
+          url: 'https://16375mc41i.execute-api.us-east-1.amazonaws.com/IOS/configuration',
+          headers: {
+            'Host': '16375mc41i.execute-api.us-east-1.amazonaws.com',
+            'Accept': '*/*',
+            'Authorization': `${this.aladdin.tokenType} ${this.aladdin.accessToken}`,
+            'app_version': '5.17',
+            'X-API-KEY': '2BcHhgzjAa58BXkpbYM977jFvr3pJUhH52nflMuS',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'User-Agent': 'Aladdin%20Connect/75 CFNetwork/1335.0.2 Darwin/21.6.0',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+          },
+          validateStatus: (status) => {
+            return status === 200;
+          },
+          timeout: 60000,
+          timeoutErrorMessage: 'Request Timed Out',
+        }).then(response => {
+          this.debugResponse(response.data);
+          const device = response.data.devices.find(device => device.id === this.device.id);
+          const GarageDoor: [Device, Door] = [device, device.doors.find(door => door.id === this.door.id)];
+          this.device = GarageDoor[0];
+          this.door = GarageDoor[1];
+          resolve(GarageDoor);
+          resolve(GarageDoor);
+        }).catch(err => reject(this.aladdin.parseError(err)));
+      } else {
+        this.log('Getting Door Via Device');
+        axios({
+          method: 'get',
+          url: `https://16375mc41i.execute-api.us-east-1.amazonaws.com/IOS/devices/${this.device.id}`,
+          headers: {
+            'Host': '16375mc41i.execute-api.us-east-1.amazonaws.com',
+            'Accept': '*/*',
+            'Authorization': `${this.aladdin.tokenType} ${this.aladdin.accessToken}`,
+            'app_version': '5.17',
+            'X-API-KEY': '2BcHhgzjAa58BXkpbYM977jFvr3pJUhH52nflMuS',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+            'User-Agent': 'Aladdin%20Connect/75 CFNetwork/1335.0.2 Darwin/21.6.0',
+            'Connection': 'keep-alive',
+            'Content-Type': 'application/json',
+          },
+          validateStatus: (status) => {
+            return status === 200;
+          },
+          timeout: 60000,
+          timeoutErrorMessage: 'Request Timed Out',
+        }).then(response => {
+          this.debugResponse(response.data);
+          const GarageDoor: [Device, Door] = [response.data, response.data.doors.find(door1 => door1.id === this.door.id)];
+          this.device = GarageDoor[0];
+          this.door = GarageDoor[1];
+          resolve(GarageDoor);
+        }).catch(err => reject(this.aladdin.parseError(err)));
+      }
     });
   }
 
