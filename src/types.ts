@@ -103,7 +103,7 @@ export interface Configuration {
     recv: Invite[];
     settings: {
       user_id?: number;
-      temperary_access_enabled: boolean;
+      temporary_access_enabled: boolean;
       id?: number;
     };
   };
